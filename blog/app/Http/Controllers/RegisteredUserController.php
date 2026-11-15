@@ -14,7 +14,7 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
-    function store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:60', 'min:3'],

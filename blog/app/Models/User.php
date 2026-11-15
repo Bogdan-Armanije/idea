@@ -33,7 +33,7 @@ class User extends Authenticatable
         ];
     }
 
-    protected function ideas() : hasMany
+    public function ideas() : hasMany
         {
         return $this->hasMany(Idea::class);
         }
