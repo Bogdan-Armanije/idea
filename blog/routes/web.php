@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/ideas');
 
 Route::get('/ideas', [IdeaController::class, 'index'])->middleware('auth');
-Route::get('/idea/{$idea}', [IdeaController::class, 'index'])->middleware('auth')->name('idea.show');
+Route::get('/idea/{idea}', [IdeaController::class, 'show'])->middleware('auth')->name('idea.show');
+Route::delete('/idea/{idea}', [IdeaController::class, 'destroy'])->middleware('auth')->name('idea.destroy');
 
 Route::get('/register', [RegisteredUserController::class, 'create'])->middleware('guest')->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store'])->middleware('guest');
