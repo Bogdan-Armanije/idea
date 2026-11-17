@@ -21,6 +21,7 @@ class IdeaController extends Controller
         $ideas_ = Auth::user()
             ->ideas()
             ->when($request->status, fn($query, $status) => $query->where('status', $status))
+            ->latest()
             ->get();
 
         $realCount = Idea::statusCount(Auth::user());
@@ -39,9 +40,11 @@ class IdeaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreIdeaRequest $request): void
+    public function store(StoreIdeaRequest $request)
     {
-        //
+        Auth::user()->ideas()->create($request->validated());
+
+        return to_route('idea.index')->with('success', 'Idea created!');
     }
 
     /**
@@ -49,7 +52,7 @@ class IdeaController extends Controller
      */
     public function show(Idea $idea): View
     {
-        return view('idea.show',compact('idea'));
+        return view('idea.show',['idea' => $idea]);
     }
 
     /**

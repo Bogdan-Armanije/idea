@@ -38,7 +38,7 @@
                 </div>
             </x-card>
 
-            @if($idea->links->count())
+            @if($idea->links)
             <div>
                 <h3 class="font-bold text-xl mt-6"> Links </h3>
 

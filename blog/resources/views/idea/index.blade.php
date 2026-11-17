@@ -11,7 +11,7 @@
                 is="button"
                 type="button"
                 class="mt-10 cursor-pointer h-32 w-full text-left"
-
+                data-test="create-idea-button"
             >
                 <p>What's the idea? </p>
             </x-card>
@@ -48,7 +48,50 @@
         </div>
 
         <x-modal name="create-idea" title="New Idea">
-        <p>Slot content here</p>
+            <form x-data="{status: 'pending' }" action="{{route('idea.store')}}" method="post">
+                @csrf
+                <div class="space-y-6">
+                    <x-form.field
+                        label="Title"
+                        name="title"
+                        placeholder="Enter an idea for your title"
+                        autofocus
+                        required
+                    ></x-form.field>
+
+                    <div class="space-y-2">
+                        <label for="status" class="label">Status</label>
+                        <div class="flex gap-x-3">
+                            @foreach(App\IdeaStatus::cases() as $status)
+                                <button type="button" @click="status=@js($status->value)" class="btn flex-1 h-10 "
+                                        :class="status === @js($status->value) ? '' : 'btn-outlined' "
+                                        data-test="button-status-{{ $status->value }}"
+                                > {{ $status->label() }}</button>
+                            @endforeach
+
+                            <input type="hidden" name="status" :value="status" class="input">
+                        </div>
+
+                        <x-form.error name="status"/>
+                    </div>
+
+                    <x-form.field
+                    label="Description"
+                    name="description"
+                    type="textarea"
+                    placeholder="Describe your idea..."
+                    autofocus
+                    ></x-form.field>
+
+                    <div class="flex justify-end gap-x-5">
+                        <button type="button" @click="$dispatch('close-modal')">Cancel</button>
+                        <button type="submit" data-test="submit-button" class="btn">Create</button>
+                    </div>
+                </div>
+
+
+
+            </form>
         </x-modal>
 
     </div>
