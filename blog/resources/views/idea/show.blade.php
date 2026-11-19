@@ -21,6 +21,13 @@
 
         </div>
 
+        <div class="mt-8 space-y-6">
+        @if($idea->image_path)
+        <div class="rounded-lg overflow-hidden">
+            <img src="{{ asset('storage/' . $idea->image_path) }}" alt="idea image" class="w-full h-auto object-cover">
+        </div>
+        @endif
+        </div>
 
         <div class="mt-8 space-y-6">
             <h1 class="font-bold text-4xl">
