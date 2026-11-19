@@ -49,7 +49,7 @@
 
         <x-modal name="create-idea" title="New Idea">
             <form x-data=
-                      "{status: 'pending' , newLink: '', links: []}"
+                      "{status: 'pending' , newLink: '', links: [], newStep: '', steps: [] }"
                   action="{{route('idea.store')}}" method="post">
                 @csrf
                 <div class="space-y-6">
@@ -84,6 +84,83 @@
                     placeholder="Describe your idea..."
                     autofocus
                     ></x-form.field>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- OVO JE STEPS  A DOLE JE LINKS !-->
+
+
+
+
+
+
+
+                    <div>
+                        <fieldset class="space-y-3">
+                            <legend class="label">Steps</legend>
+
+                            <template x-for="(step, index) in steps" :key="index">
+                                <div class="flex items-center gap-x-2">
+                                    <input name="steps[]" :value="step" class="input" readonly>
+
+                                    <button
+                                        type="button"
+                                        aria-label="Remove step"
+                                        @click="steps.splice(index, 1)"
+                                        class="form-muted-icon"
+                                    >
+                                        <x-icons.close></x-icons.close>
+                                    </button>
+                                </div>
+                            </template>
+
+                            <div class="flex items-center gap-x-2">
+                                <input
+                                    x-model="newStep"
+                                    id="new-step"
+                                    data-test="new-step"
+                                    placeholder="What needs to be done?"
+                                    class="input flex-1"
+                                    spellcheck="false"
+                                >
+                                <button
+                                    type="button"
+                                    @click="steps.push(newStep.trim()); newStep='';"
+                                    :disabled="newStep.trim().length === 0"
+                                    data-test="submit-new-step-button"
+                                    aria-label="Add step button"
+                                    class="form-muted-icon"
+                                >
+                                    <x-icons.close class="rotate-45"></x-icons.close>
+                                </button>
+                            </div>
+                        </fieldset>
+                    </div>
+
+
+
+
+
+
+
+
+                            <!-- OVO JE STEPS  A DOLE JE LINKS !-->
+
 
                     <div>
                         <fieldset class="space-y-3">
