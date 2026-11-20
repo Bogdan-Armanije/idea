@@ -11,17 +11,24 @@ it('creates a new idea', function () {
        ->fill('description', 'Create a new idea wohoo')
        ->fill('@new-link', 'https://www.instagram.com/')
        ->click('@submit-new-link-button')
-       ->fill('@new-link', 'https://www.instagram.com/')
+       ->fill('@new-link', 'https://www.youtube.com/')
        ->click('@submit-new-link-button')
-       ->debug()
+       ->fill('@new-step', 'lolololol')
+       ->click('@submit-new-step-button')
        ->click('@submit-button')
-       ->assertPathIs('/ideas');
+       ->click('@create-idea-button');
 
-        expect($user->ideas()->first())->toMatchArray([
+
+
+        expect($idea = $user->ideas()->first())->toMatchArray([
             'title' => 'Create a new idea',
             'description' => 'Create a new idea wohoo',
-            'links' => ['https://www.instagram.com/']
+            'links' => ['https://www.instagram.com/','https://www.youtube.com/'],
+            'status'=> 'pending',
         ]);
 
+        expect($idea->steps()->first())->toMatchArray([
+           'description' => 'lolololol',
+        ]);
 
 });
