@@ -11,5 +11,7 @@
 
             <button type="submit" class="btn mt-2 h-10 w-full">Create Account</button>
         </form>
+        <a href="/login" class="text-primary underline">Sign in</a>
     </x-form>
+
 </x-layout>

@@ -6,7 +6,7 @@ it('creates a new idea', function () {
     $this->actingAs($user = User::factory()->create());
    visit('/ideas')
        ->click('@create-idea-button')
-       ->assertSee('New Idea')
+       ->assertSee('Create Idea')
        ->fill('title', 'Create a new idea')
        ->fill('description', 'Create a new idea wohoo')
        ->fill('@new-link', 'https://www.instagram.com/')
@@ -23,12 +23,11 @@ it('creates a new idea', function () {
         expect($idea = $user->ideas()->first())->toMatchArray([
             'title' => 'Create a new idea',
             'description' => 'Create a new idea wohoo',
-            'links' => ['https://www.instagram.com/','https://www.youtube.com/'],
-            'status'=> 'pending',
-        ]);
-
-        expect($idea->steps()->first())->toMatchArray([
-           'description' => 'lolololol',
-        ]);
+            'links' => ['https://www.instagram.com/', 'https://www.youtube.com/'],
+            'status' => 'pending',
+        ])
+            ->and($idea->steps()->first())->toMatchArray([
+                'description' => 'lolololol',
+            ]);
 
 });

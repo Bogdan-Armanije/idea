@@ -12,6 +12,7 @@
                 <a href="/register" class="btn">Sign Up</a>
             @endguest
             @auth
+                <a href="/profile">Edit Profile</a>
                 <form method="post" action="/logout">
                     @csrf
                     <button type="submit">Logout</button>

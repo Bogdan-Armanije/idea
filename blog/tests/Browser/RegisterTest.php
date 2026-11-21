@@ -8,7 +8,7 @@ test('register a user', function() {
         ->fill('email','peraperic@gmail.com')
         ->fill('password','password')
         ->press('Create Account')
-        ->assertSee('Home page');
+        ->assertSee('Capture your thoughts.');
 
     $this->assertAuthenticated();
     expect(Auth::user())->toMatchArray([

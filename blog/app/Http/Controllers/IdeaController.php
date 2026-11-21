@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use Throwable;
 use App\Actions\CreateIdea;
 use App\Actions\UpdateIdea;
 use App\Models\Idea;
 use App\Http\Requests\IdeaRequest;
-use App\Http\Requests\UpdateIdeaRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -42,14 +42,13 @@ class IdeaController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function store(IdeaRequest $request, CreateIdea $action)
     {
 
-        logger($request->all());
 
-       $action->handle($request->safe()->all(),$request->user());
+       $action->handle($request->safe()->all());
 
 
 

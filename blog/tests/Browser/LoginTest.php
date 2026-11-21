@@ -2,18 +2,18 @@
 
 use App\Models\User;
 
-test('Log in a user', function ()  {
+it('Log in a user', function ()  {
     $user = User::factory()->create(['password' => 'password']);
     visit('/login')
         ->fill('email',$user->email)
         ->fill('password','password')
         ->click('@login-button')
-        ->assertPathIs('/');
+        ->assertPathIs('/ideas');
 
     $this->assertAuthenticated();
 });
 
-test('log out', function () {
+it('log out', function () {
    $user = User::factory()->create();
 
    $this->actingAs($user);

@@ -2,10 +2,8 @@
 
 namespace App\Actions;
 
+use Throwable;
 use App\Models\Idea;
-use App\Models\User;
-use Illuminate\Container\Attributes\CurrentUser;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UpdateIdea{
@@ -13,9 +11,9 @@ class UpdateIdea{
 
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
-    public function handle(array $attributes, Idea $idea){
+    public function handle(array $attributes, Idea $idea): void{
 
         $data= collect($attributes)->only(['title','description','status','links'])->toArray();
 

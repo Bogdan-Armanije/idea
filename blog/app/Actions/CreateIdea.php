@@ -2,9 +2,9 @@
 
 namespace App\Actions;
 
+use Throwable;
 use App\Models\User;
 use Illuminate\Container\Attributes\CurrentUser;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CreateIdea{
@@ -15,9 +15,9 @@ class CreateIdea{
 
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
-    public function handle(array $attributes){
+    public function handle(array $attributes): void{
 
         $data= collect($attributes)->only(['title','description','status','links'])->toArray();
 

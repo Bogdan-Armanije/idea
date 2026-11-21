@@ -52,7 +52,7 @@
                 </x-card>
             @endif
 
-            @if($idea->steps)
+            @if($idea->steps->isNotEmpty())
                 <div>
                     <h3 class="font-bold text-xl mt-6"> Actionable Steps </h3>
 
